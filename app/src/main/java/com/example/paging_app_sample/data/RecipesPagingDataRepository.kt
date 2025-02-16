@@ -21,7 +21,7 @@ class RecipesPagingDataRepository(
     }
 
     companion object {
-        // APIの仕様により4件ずつしかデータを取得できない
+        // APIの仕様により4件ずつしかデータを取得できないため
         private const val PAGE_SIZE = 4
     }
 }
