@@ -52,9 +52,7 @@ fun RecipesScreen(
     when (response.loadState.refresh) {
         is LoadState.Loading -> LoadingScreen(modifier)
         is LoadState.Error -> ErrorScreen({ response.retry() }, modifier)
-        else -> ResultScreen(
-            response, modifier = modifier.fillMaxSize()
-        )
+        else -> ResultScreen(response, modifier)
     }
 }
 
@@ -101,7 +99,7 @@ fun ResultScreen(recipes: LazyPagingItems<Recipe>, modifier: Modifier = Modifier
                             .height(Dimensions.cardHeight),
                         shape = RectangleShape
                     ) {
-                        Column {
+                        Column(modifier = Modifier.padding(Dimensions.paddingMedium)) {
                             Photo(url = recipe.imageUrl)
                             Title(title = recipe.title)
                             Description(description = recipe.description)
