@@ -1,5 +1,6 @@
 package com.example.paging_app_sample.data
 
+import com.example.paging_app_sample.model.Recipe
 import kotlinx.serialization.Serializable
 
 // APIの出力パラメータ
@@ -26,4 +27,14 @@ data class CategoryRankRecipe(
     val recipeCost: String,
     val recipePublishday: String,
     val rank: Int
-)
+) {
+    fun convertToRecipe(): Recipe {
+        return Recipe(
+            id = recipeId.toString(),
+            title = recipeTitle,
+            url = recipeUrl,
+            imageUrl = foodImageUrl,
+            description = recipeDescription
+        )
+    }
+}
