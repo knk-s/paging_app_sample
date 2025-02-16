@@ -17,7 +17,7 @@ private val retrofit = Retrofit.Builder()
 
 interface CategoryRankApiService {
     @GET("20170426")
-    fun getRecipes(
+    suspend fun getRecipes(
         @Query("applicationId") applicationId: String,
         @Query("categoryId") categoryId: String
     ): CategoryRankResponse
