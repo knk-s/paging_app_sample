@@ -1,8 +1,9 @@
 package com.example.paging_app_sample.ui
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Surface
@@ -10,7 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.paging_app_sample.model.Recipe
 import com.example.paging_app_sample.ui.theme.Paging_app_sampleTheme
 
@@ -19,7 +24,7 @@ fun RecipesScreen(
     uiState: UiState,
     modifier: Modifier = Modifier
 ) {
-    when(uiState) {
+    when (uiState) {
         is UiState.Loading -> LoadingScreen(modifier.fillMaxSize())
         is UiState.Error -> ErrorScreen(modifier.fillMaxSize())
         is UiState.Success -> ResultScreen(
@@ -63,11 +68,24 @@ fun ResultScreen(recipes: List<Recipe>, modifier: Modifier = Modifier) {
                 Text(text = recipe.id)
                 Text(text = recipe.title)
                 Text(text = recipe.url)
-                Text(text = recipe.imageUrl)
+                Photo(url = recipe.imageUrl)
                 Text(text = recipe.description)
             }
         }
     }
+}
+
+@Composable
+fun Photo(url: String, modifier: Modifier = Modifier) {
+    AsyncImage(
+        model = ImageRequest.Builder(context = LocalContext.current)
+            .data(url).build(),
+        contentDescription = "Recipe photo",
+        contentScale = ContentScale.Crop,
+        modifier = modifier
+            .fillMaxWidth()
+            .aspectRatio(1f / 1f)
+    )
 }
 
 @Preview
