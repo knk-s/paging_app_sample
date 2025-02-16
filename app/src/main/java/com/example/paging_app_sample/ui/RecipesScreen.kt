@@ -1,13 +1,11 @@
 package com.example.paging_app_sample.ui
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,6 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.paging_app_sample.model.Recipe
@@ -23,14 +24,16 @@ import com.example.paging_app_sample.ui.theme.Paging_app_sampleTheme
 
 @Composable
 fun RecipesScreen(
-    uiState: UiState,
+    viewModel: RecipesViewModel,
     modifier: Modifier = Modifier
 ) {
-    when (uiState) {
-        is UiState.Loading -> LoadingScreen(modifier.fillMaxSize())
-        is UiState.Error -> ErrorScreen(modifier.fillMaxSize())
-        is UiState.Success -> ResultScreen(
-            uiState.recipes, modifier = modifier.fillMaxSize()
+    val response = viewModel.recipes.collectAsLazyPagingItems()
+
+    when (response.loadState.refresh) {
+        is LoadState.Loading -> LoadingScreen(modifier.fillMaxSize())
+        is LoadState.Error -> ErrorScreen(modifier.fillMaxSize())
+        else -> ResultScreen(
+            response, modifier = modifier.fillMaxSize()
         )
     }
 }
@@ -61,21 +64,21 @@ fun ErrorScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ResultScreen(recipes: List<Recipe>, modifier: Modifier = Modifier) {
+fun ResultScreen(recipes: LazyPagingItems<Recipe>, modifier: Modifier = Modifier) {
     Surface {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             modifier = modifier.fillMaxSize()
         ) {
-            items(recipes) { recipe ->
-                Column {
-                    Photo(url = recipe.imageUrl)
-                    Text(text = recipe.id)
-                    Text(text = recipe.title)
-                    Text(text = recipe.url)
-                    Text(text = recipe.description)
-                }
-            }
+//            items(recipes) { recipe ->
+//                Column {
+//                    Photo(url = recipe.imageUrl)
+//                    Text(text = recipe.id)
+//                    Text(text = recipe.title)
+//                    Text(text = recipe.url)
+//                    Text(text = recipe.description)
+//                }
+//            }
         }
     }
 }
@@ -130,6 +133,6 @@ fun ResultScreenPreview() {
     )
 
     Paging_app_sampleTheme {
-        ResultScreen(recipes = sampleRecipes)
+        // ResultScreen(recipes = sampleRecipes)
     }
 }
