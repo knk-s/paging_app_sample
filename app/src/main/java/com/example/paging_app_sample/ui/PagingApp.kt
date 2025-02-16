@@ -16,7 +16,7 @@ fun PagingApp() {
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            val recipesViewModel: RecipesViewModel = viewModel()
+            val recipesViewModel: RecipesViewModel = viewModel(factory = RecipesViewModel.Factory)
             RecipesScreen(uiState = recipesViewModel.uiState)
         }
     }
