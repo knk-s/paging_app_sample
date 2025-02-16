@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">paging_app_sample</string>
+
+    <string name="app_title">レシピ一覧</string>
+    <string name="error_message">エラーが発生しました。</string>
+    <string name="retry_button">再試行</string>
+    <string name="recipe_link">レシピを見る</string>
 </resources>
