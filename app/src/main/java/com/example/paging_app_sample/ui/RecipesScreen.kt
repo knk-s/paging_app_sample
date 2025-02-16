@@ -1,11 +1,13 @@
 package com.example.paging_app_sample.ui
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -61,15 +63,18 @@ fun ErrorScreen(modifier: Modifier = Modifier) {
 @Composable
 fun ResultScreen(recipes: List<Recipe>, modifier: Modifier = Modifier) {
     Surface {
-        LazyColumn(
-            modifier = modifier
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            modifier = modifier.fillMaxSize()
         ) {
             items(recipes) { recipe ->
-                Text(text = recipe.id)
-                Text(text = recipe.title)
-                Text(text = recipe.url)
-                Photo(url = recipe.imageUrl)
-                Text(text = recipe.description)
+                Column {
+                    Photo(url = recipe.imageUrl)
+                    Text(text = recipe.id)
+                    Text(text = recipe.title)
+                    Text(text = recipe.url)
+                    Text(text = recipe.description)
+                }
             }
         }
     }
