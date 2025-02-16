@@ -14,7 +14,8 @@ class NetworkRecipesRepository(): RecipesRepository {
         val categoryId = "14"
         val response = CategoryRankApi.api.getRecipes(
             applicationId = applicationId,
-            categoryId = categoryId)
+            categoryId = categoryId
+        )
         return response.result.map { it.convertToRecipe() }
     }
 }
