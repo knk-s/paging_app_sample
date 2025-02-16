@@ -8,6 +8,8 @@ import retrofit2.Retrofit
 
 interface AppContainer {
     val recipesRepository: RecipesRepository
+    val recipesPagingSource: RecipesPagingSource
+    val recipesPagingDataRepository: RecipesPagingDataRepository
 }
 
 class DefaultAppContainer: AppContainer {
@@ -24,5 +26,13 @@ class DefaultAppContainer: AppContainer {
 
     override val recipesRepository: RecipesRepository by lazy {
         NetworkRecipesRepository(categoryRankApiService)
+    }
+
+    override val recipesPagingSource: RecipesPagingSource by lazy {
+        RecipesPagingSource(recipesRepository)
+    }
+
+    override val recipesPagingDataRepository: RecipesPagingDataRepository by lazy {
+        RecipesPagingDataRepository(recipesPagingSource)
     }
 }
