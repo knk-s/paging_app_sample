@@ -1,6 +1,7 @@
 package com.example.paging_app_sample.ui
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,12 +16,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.paging_app_sample.model.Recipe
 import com.example.paging_app_sample.ui.theme.Paging_app_sampleTheme
+import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun RecipesScreen(
@@ -70,15 +73,17 @@ fun ResultScreen(recipes: LazyPagingItems<Recipe>, modifier: Modifier = Modifier
             columns = GridCells.Fixed(2),
             modifier = modifier.fillMaxSize()
         ) {
-//            items(recipes) { recipe ->
-//                Column {
-//                    Photo(url = recipe.imageUrl)
-//                    Text(text = recipe.id)
-//                    Text(text = recipe.title)
-//                    Text(text = recipe.url)
-//                    Text(text = recipe.description)
-//                }
-//            }
+            items(recipes.itemCount) { index ->
+                recipes[index]?.let { recipe ->
+                    Column {
+                        Photo(url = recipe.imageUrl)
+                        Text(text = recipe.id)
+                        Text(text = recipe.title)
+                        Text(text = recipe.url)
+                        Text(text = recipe.description)
+                    }
+                }
+            }
         }
     }
 }
@@ -115,24 +120,28 @@ fun ErrorScreenPreview() {
 @Preview
 @Composable
 fun ResultScreenPreview() {
-    val sampleRecipes = listOf(
-        Recipe(
-            id = "0001",
-            title = "レシピ1",
-            url = "recipe1.com",
-            imageUrl = "recipe1-image.com",
-            description = "レシピ1の説明です。"
-        ),
-        Recipe(
-            id = "0002",
-            title = "レシピ2",
-            url = "recipe2.com",
-            imageUrl = "recipe2-image.com",
-            description = "レシピ2の説明です。"
+    val sampleRecipes = PagingData.from(
+        listOf(
+            Recipe(
+                id = "0001",
+                title = "レシピ1",
+                url = "recipe1.com",
+                imageUrl = "recipe1-image.com",
+                description = "レシピ1の説明です。"
+            ),
+            Recipe(
+                id = "0002",
+                title = "レシピ2",
+                url = "recipe2.com",
+                imageUrl = "recipe2-image.com",
+                description = "レシピ2の説明です。"
+            )
         )
     )
+    val flow = flowOf(sampleRecipes)
+    val items = flow.collectAsLazyPagingItems()
 
     Paging_app_sampleTheme {
-        // ResultScreen(recipes = sampleRecipes)
+        ResultScreen(recipes = items)
     }
 }
