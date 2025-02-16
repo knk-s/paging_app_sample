@@ -5,15 +5,14 @@ import com.example.paging_app_sample.model.Recipe
 import com.example.paging_app_sample.network.CategoryRankApiService
 
 interface RecipesRepository {
-    suspend fun getRecipes(): List<Recipe>
+    suspend fun getRecipes(categoryId: String): List<Recipe>
 }
 
 class NetworkRecipesRepository(
     private val apiService: CategoryRankApiService
 ) : RecipesRepository {
-    override suspend fun getRecipes(): List<Recipe> {
+    override suspend fun getRecipes(categoryId: String): List<Recipe> {
         val applicationId = BuildConfig.apiKey
-        val categoryId = "14"
         val response = apiService.getRecipes(
             applicationId = applicationId,
             categoryId = categoryId
