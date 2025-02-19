@@ -1,9 +1,12 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("org.jetbrains.kotlin.plugin.serialization") version "2.1.0"
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 android {
@@ -39,6 +42,22 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+    }
+    lint {
+        htmlReport = true
+        xmlReport = true
+        checkDependencies = true
+    }
+}
+
+ktlint {
+    android = true
+    reporters {
+        reporter(ReporterType.CHECKSTYLE)
+    }
+    filter {
+        exclude("**/androidTest/**")
+        exclude("**/test/**")
     }
 }
 
