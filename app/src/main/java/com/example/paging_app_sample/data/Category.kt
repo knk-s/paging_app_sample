@@ -3,7 +3,7 @@ package com.example.paging_app_sample.data
 /*
   楽天レシピの大カテゴリ。今のところRICE_DISHES（ご飯もの）以外未使用。
 */
-enum class LargeCategory(val id: String, val displayName: String){
+enum class LargeCategory(val id: String, val displayName: String) {
     MEAT("10", "肉"),
     FISH("11", "魚"),
     VEGETABLES("12", "野菜"),
@@ -46,7 +46,8 @@ enum class LargeCategory(val id: String, val displayName: String){
     SPRING("52", "春（3月～5月）"),
     SUMMER("53", "夏（6月～8月）"),
     AUTUMN("54", "秋（9月～11月）"),
-    WINTER("55", "冬（12月～2月）");
+    WINTER("55", "冬（12月～2月）"),
+    ;
 }
 
 /*
@@ -70,11 +71,11 @@ enum class RiceDishMediumCategory(
     PAELLA("126", "パエリア"),
     PILAF("127", "ピラフ"),
     OTHER_RICE_DISHES("271", "その他のごはん料理"),
-    HASHED_BEEF("368", "ハッシュドビーフ");
+    HASHED_BEEF("368", "ハッシュドビーフ"),
+    ;
 
     companion object {
-        fun fromOrdinal(ordinal: Int): RiceDishMediumCategory =
-            entries.getOrNull(ordinal) ?: HASHED_BEEF
+        fun fromOrdinal(ordinal: Int): RiceDishMediumCategory = entries.getOrNull(ordinal) ?: HASHED_BEEF
 
         fun getMaxOrdinal(): Int = entries.size - 1
     }

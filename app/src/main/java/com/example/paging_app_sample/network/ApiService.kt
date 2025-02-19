@@ -8,7 +8,6 @@ interface CategoryRankApiService {
     @GET("20170426")
     suspend fun getRecipes(
         @Query("applicationId") applicationId: String,
-        @Query("categoryId") categoryId: String
+        @Query("categoryId") categoryId: String,
     ): CategoryRankResponse
 }
-

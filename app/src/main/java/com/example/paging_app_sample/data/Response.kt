@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CategoryRankResponse(
-    val result: List<CategoryRankRecipe>
+    val result: List<CategoryRankRecipe>,
 )
 
 @Serializable
@@ -26,7 +26,7 @@ data class CategoryRankRecipe(
     val recipeIndication: String,
     val recipeCost: String,
     val recipePublishday: String,
-    val rank: Int
+    val rank: Int,
 ) {
     fun convertToRecipe(): Recipe {
         return Recipe(
@@ -34,7 +34,7 @@ data class CategoryRankRecipe(
             title = recipeTitle,
             url = recipeUrl,
             imageUrl = foodImageUrl,
-            description = recipeDescription
+            description = recipeDescription,
         )
     }
 }

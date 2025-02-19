@@ -7,14 +7,15 @@ import com.example.paging_app_sample.model.Recipe
 import kotlinx.coroutines.flow.Flow
 
 class RecipesPagingDataRepository(
-    private val recipesPagingSource: RecipesPagingSource
+    private val recipesPagingSource: RecipesPagingSource,
 ) {
     fun getRecipes(): Flow<PagingData<Recipe>> {
         return Pager(
-            config = PagingConfig(
-                pageSize = PAGE_SIZE,
-                enablePlaceholders = false
-            )
+            config =
+                PagingConfig(
+                    pageSize = PAGE_SIZE,
+                    enablePlaceholders = false,
+                ),
         ) {
             recipesPagingSource
         }.flow

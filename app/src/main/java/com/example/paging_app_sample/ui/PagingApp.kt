@@ -24,12 +24,13 @@ fun PagingApp() {
     Scaffold(
         topBar = {
             AppBar(scrollBehavior)
-        }
+        },
     ) { innerPadding ->
         Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
         ) {
             val recipesViewModel: RecipesViewModel = viewModel(factory = RecipesViewModel.Factory)
             RecipesScreen(viewModel = recipesViewModel)
@@ -39,15 +40,18 @@ fun PagingApp() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBar(scrollBehavior: TopAppBarScrollBehavior, modifier: Modifier = Modifier) {
+fun AppBar(
+    scrollBehavior: TopAppBarScrollBehavior,
+    modifier: Modifier = Modifier,
+) {
     CenterAlignedTopAppBar(
         title = {
             Text(
                 text = stringResource(R.string.app_title),
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleLarge,
             )
         },
         scrollBehavior = scrollBehavior,
-        modifier = modifier
+        modifier = modifier,
     )
 }
