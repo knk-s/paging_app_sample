@@ -1,4 +1,4 @@
-package com.example.paging_app_sample.ui
+package com.example.pagingappsample.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.paging_app_sample.R
+import com.example.pagingappsample.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,12 +24,13 @@ fun PagingApp() {
     Scaffold(
         topBar = {
             AppBar(scrollBehavior)
-        }
+        },
     ) { innerPadding ->
         Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
         ) {
             val recipesViewModel: RecipesViewModel = viewModel(factory = RecipesViewModel.Factory)
             RecipesScreen(viewModel = recipesViewModel)
@@ -39,15 +40,18 @@ fun PagingApp() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBar(scrollBehavior: TopAppBarScrollBehavior, modifier: Modifier = Modifier) {
+fun AppBar(
+    scrollBehavior: TopAppBarScrollBehavior,
+    modifier: Modifier = Modifier,
+) {
     CenterAlignedTopAppBar(
         title = {
             Text(
                 text = stringResource(R.string.app_title),
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleLarge,
             )
         },
         scrollBehavior = scrollBehavior,
-        modifier = modifier
+        modifier = modifier,
     )
 }

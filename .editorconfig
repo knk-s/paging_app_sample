@@ -1,0 +1,4 @@
+# This configuration is used by ktlint
+
+[*.{kt,kts}]
+ktlint_function_naming_ignore_when_annotated_with = Composable

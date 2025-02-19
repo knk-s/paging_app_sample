@@ -1,4 +1,4 @@
-package com.example.paging_app_sample.ui
+package com.example.pagingappsample.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -36,16 +36,16 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.paging_app_sample.R
-import com.example.paging_app_sample.model.Recipe
-import com.example.paging_app_sample.ui.theme.Dimensions
-import com.example.paging_app_sample.ui.theme.Paging_app_sampleTheme
+import com.example.pagingappsample.R
+import com.example.pagingappsample.model.Recipe
+import com.example.pagingappsample.ui.theme.Dimensions
+import com.example.pagingappsample.ui.theme.Paging_app_sampleTheme
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun RecipesScreen(
     viewModel: RecipesViewModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val response = viewModel.recipes.collectAsLazyPagingItems()
 
@@ -61,21 +61,24 @@ fun LoadingScreen(modifier: Modifier = Modifier) {
     Surface {
         Box(
             modifier = modifier,
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
         ) {
             CircularProgressIndicator(
-                modifier = modifier.size(Dimensions.indicatorSize)
+                modifier = modifier.size(Dimensions.indicatorSize),
             )
         }
     }
 }
 
 @Composable
-fun ErrorScreen(onClick: () -> Unit, modifier: Modifier = Modifier) {
+fun ErrorScreen(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(text = stringResource(R.string.error_message))
         Button(onClick = onClick, modifier = Modifier.padding(Dimensions.paddingMedium)) {
@@ -85,19 +88,23 @@ fun ErrorScreen(onClick: () -> Unit, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ResultScreen(recipes: LazyPagingItems<Recipe>, modifier: Modifier = Modifier) {
+fun ResultScreen(
+    recipes: LazyPagingItems<Recipe>,
+    modifier: Modifier = Modifier,
+) {
     Surface {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            modifier = modifier.fillMaxSize()
+            modifier = modifier.fillMaxSize(),
         ) {
             items(recipes.itemCount) { index ->
                 recipes[index]?.let { recipe ->
                     Card(
-                        modifier = Modifier
-                            .padding(Dimensions.paddingSmall)
-                            .height(Dimensions.cardHeight),
-                        shape = RectangleShape
+                        modifier =
+                            Modifier
+                                .padding(Dimensions.paddingSmall)
+                                .height(Dimensions.cardHeight),
+                        shape = RectangleShape,
                     ) {
                         Column(modifier = Modifier.padding(Dimensions.paddingMedium)) {
                             Photo(url = recipe.imageUrl)
@@ -113,15 +120,22 @@ fun ResultScreen(recipes: LazyPagingItems<Recipe>, modifier: Modifier = Modifier
 }
 
 @Composable
-fun Photo(url: String, modifier: Modifier = Modifier) {
+fun Photo(
+    url: String,
+    modifier: Modifier = Modifier,
+) {
     AsyncImage(
-        model = ImageRequest.Builder(context = LocalContext.current)
-            .data(url).build(),
+        model =
+            ImageRequest
+                .Builder(context = LocalContext.current)
+                .data(url)
+                .build(),
         contentDescription = "Recipe photo",
         contentScale = ContentScale.Crop,
-        modifier = modifier
-            .fillMaxWidth()
-            .aspectRatio(1f / 1f)
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .aspectRatio(1f / 1f),
     )
 }
 
@@ -131,7 +145,7 @@ fun Title(title: String) {
         text = title,
         style = MaterialTheme.typography.titleMedium,
         fontWeight = FontWeight.W600,
-        modifier = Modifier.padding(vertical = Dimensions.paddingLarge)
+        modifier = Modifier.padding(vertical = Dimensions.paddingLarge),
     )
 }
 
@@ -140,12 +154,12 @@ fun Description(description: String) {
     Text(
         text = description,
         maxLines = 6,
-        overflow = TextOverflow.Ellipsis
+        overflow = TextOverflow.Ellipsis,
     )
 }
 
-@Composable
 // リンクは外部ブラウザで開く
+@Composable
 fun Link(url: String) {
     val uriHandler = LocalUriHandler.current
 
@@ -153,14 +167,15 @@ fun Link(url: String) {
         text = stringResource(R.string.recipe_link),
         color = MaterialTheme.colorScheme.tertiary,
         textDecoration = TextDecoration.Underline,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(vertical = Dimensions.paddingMedium)
-            .clickable(
-                onClickLabel = stringResource(R.string.recipe_link)
-            ) {
-                uriHandler.openUri(url)
-            }
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(vertical = Dimensions.paddingMedium)
+                .clickable(
+                    onClickLabel = stringResource(R.string.recipe_link),
+                ) {
+                    uriHandler.openUri(url)
+                },
     )
 }
 
@@ -183,24 +198,25 @@ fun ErrorScreenPreview() {
 @Preview
 @Composable
 fun ResultScreenPreview() {
-    val sampleRecipes = PagingData.from(
-        listOf(
-            Recipe(
-                id = "0001",
-                title = "レシピ1",
-                url = "recipe1.com",
-                imageUrl = "recipe1-image.com",
-                description = "レシピ1の説明です。"
+    val sampleRecipes =
+        PagingData.from(
+            listOf(
+                Recipe(
+                    id = "0001",
+                    title = "レシピ1",
+                    url = "recipe1.com",
+                    imageUrl = "recipe1-image.com",
+                    description = "レシピ1の説明です。",
+                ),
+                Recipe(
+                    id = "0002",
+                    title = "レシピ2",
+                    url = "recipe2.com",
+                    imageUrl = "recipe2-image.com",
+                    description = "レシピ2の説明です。",
+                ),
             ),
-            Recipe(
-                id = "0002",
-                title = "レシピ2",
-                url = "recipe2.com",
-                imageUrl = "recipe2-image.com",
-                description = "レシピ2の説明です。"
-            )
         )
-    )
     val flow = flowOf(sampleRecipes)
     val items = flow.collectAsLazyPagingItems()
 
