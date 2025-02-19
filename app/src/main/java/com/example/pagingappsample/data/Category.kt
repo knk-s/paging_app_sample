@@ -1,4 +1,4 @@
-package com.example.paging_app_sample.data
+package com.example.pagingappsample.data
 
 /*
   楽天レシピの大カテゴリ。今のところRICE_DISHES（ご飯もの）以外未使用。

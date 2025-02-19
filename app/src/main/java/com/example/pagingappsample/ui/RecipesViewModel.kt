@@ -1,4 +1,4 @@
-package com.example.paging_app_sample.ui
+package com.example.pagingappsample.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -8,14 +8,17 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.paging_app_sample.RecipesApplication
-import com.example.paging_app_sample.data.RecipesPagingDataRepository
+import com.example.pagingappsample.RecipesApplication
+import com.example.pagingappsample.data.RecipesPagingDataRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 
-class RecipesViewModel(repository: RecipesPagingDataRepository) : ViewModel() {
+class RecipesViewModel(
+    repository: RecipesPagingDataRepository,
+) : ViewModel() {
     val recipes =
-        repository.getRecipes()
+        repository
+            .getRecipes()
             .cachedIn(viewModelScope)
             .stateIn(
                 scope = viewModelScope,

@@ -10,11 +10,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.paging_app_sample"
+    namespace = "com.example.pagingappsample"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.paging_app_sample"
+        applicationId = "com.example.pagingappsample"
         minSdk = 24
         targetSdk = 35
         versionCode = 1

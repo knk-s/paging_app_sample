@@ -1,4 +1,4 @@
-package com.example.paging_app_sample.model
+package com.example.pagingappsample.model
 
 data class Recipe(
     val id: String,

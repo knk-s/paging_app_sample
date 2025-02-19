@@ -1,9 +1,9 @@
-package com.example.paging_app_sample.data
+package com.example.pagingappsample.data
 
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.paging_app_sample.model.Recipe
+import com.example.pagingappsample.model.Recipe
 import kotlinx.coroutines.delay
 
 class RecipesPagingSource(
@@ -33,12 +33,11 @@ class RecipesPagingSource(
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, Recipe>): Int? {
-        return state.anchorPosition?.let { anchorPosition ->
+    override fun getRefreshKey(state: PagingState<Int, Recipe>): Int? =
+        state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
         }
-    }
 
     // APIの仕様により、リクエストを1秒に1回以下に制限
     private suspend fun delayBetweenRequests() {

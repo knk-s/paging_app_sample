@@ -1,4 +1,4 @@
-package com.example.paging_app_sample.ui
+package com.example.pagingappsample.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -36,10 +36,10 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.paging_app_sample.R
-import com.example.paging_app_sample.model.Recipe
-import com.example.paging_app_sample.ui.theme.Dimensions
-import com.example.paging_app_sample.ui.theme.Paging_app_sampleTheme
+import com.example.pagingappsample.R
+import com.example.pagingappsample.model.Recipe
+import com.example.pagingappsample.ui.theme.Dimensions
+import com.example.pagingappsample.ui.theme.Paging_app_sampleTheme
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
