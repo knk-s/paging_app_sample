@@ -9,14 +9,15 @@ interface RecipesRepository {
 }
 
 class NetworkRecipesRepository(
-    private val apiService: CategoryRankApiService
+    private val apiService: CategoryRankApiService,
 ) : RecipesRepository {
     override suspend fun getRecipes(categoryId: String): List<Recipe> {
         val applicationId = BuildConfig.apiKey
-        val response = apiService.getRecipes(
-            applicationId = applicationId,
-            categoryId = categoryId
-        )
+        val response =
+            apiService.getRecipes(
+                applicationId = applicationId,
+                categoryId = categoryId,
+            )
         return response.result.map { it.convertToRecipe() }
     }
 }

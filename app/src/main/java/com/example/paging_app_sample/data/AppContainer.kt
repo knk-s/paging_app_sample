@@ -12,13 +12,14 @@ interface AppContainer {
     val recipesPagingDataRepository: RecipesPagingDataRepository
 }
 
-class DefaultAppContainer: AppContainer {
+class DefaultAppContainer : AppContainer {
     private val baseUrl = "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/"
 
-    private val retrofit = Retrofit.Builder()
-        .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
-        .baseUrl(baseUrl)
-        .build()
+    private val retrofit =
+        Retrofit.Builder()
+            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+            .baseUrl(baseUrl)
+            .build()
 
     private val categoryRankApiService: CategoryRankApiService by lazy {
         retrofit.create(CategoryRankApiService::class.java)

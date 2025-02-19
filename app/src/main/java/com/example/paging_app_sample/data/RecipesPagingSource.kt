@@ -7,9 +7,8 @@ import com.example.paging_app_sample.model.Recipe
 import kotlinx.coroutines.delay
 
 class RecipesPagingSource(
-    private val recipesRepository: RecipesRepository
-): PagingSource<Int, Recipe>() {
-
+    private val recipesRepository: RecipesRepository,
+) : PagingSource<Int, Recipe>() {
     private var lastRequestTime: Long = 0
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Recipe> {
@@ -26,7 +25,7 @@ class RecipesPagingSource(
             return LoadResult.Page(
                 data = recipes,
                 prevKey = if (currentPage == 0) null else currentPage - 1,
-                nextKey = if (currentPage >= RiceDishMediumCategory.getMaxOrdinal()) null else currentPage + 1
+                nextKey = if (currentPage >= RiceDishMediumCategory.getMaxOrdinal()) null else currentPage + 1,
             )
         } catch (e: Exception) {
             Log.d("RecipesPagingSource", "ERROR load() : " + e.message)

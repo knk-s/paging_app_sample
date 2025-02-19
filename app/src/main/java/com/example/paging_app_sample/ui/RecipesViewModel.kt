@@ -14,22 +14,23 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 
 class RecipesViewModel(repository: RecipesPagingDataRepository) : ViewModel() {
-
-    val recipes = repository.getRecipes()
-        .cachedIn(viewModelScope)
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = PagingData.empty()
-        )
+    val recipes =
+        repository.getRecipes()
+            .cachedIn(viewModelScope)
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = PagingData.empty(),
+            )
 
     companion object {
-        val Factory: ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                val application = (this[APPLICATION_KEY] as RecipesApplication)
-                val repository = application.container.recipesPagingDataRepository
-                RecipesViewModel(repository)
+        val Factory: ViewModelProvider.Factory =
+            viewModelFactory {
+                initializer {
+                    val application = (this[APPLICATION_KEY] as RecipesApplication)
+                    val repository = application.container.recipesPagingDataRepository
+                    RecipesViewModel(repository)
+                }
             }
-        }
     }
 }
