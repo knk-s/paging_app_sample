@@ -126,8 +126,10 @@ fun Photo(
 ) {
     AsyncImage(
         model =
-            ImageRequest.Builder(context = LocalContext.current)
-                .data(url).build(),
+            ImageRequest
+                .Builder(context = LocalContext.current)
+                .data(url)
+                .build(),
         contentDescription = "Recipe photo",
         contentScale = ContentScale.Crop,
         modifier =
