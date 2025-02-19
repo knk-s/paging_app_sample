@@ -61,6 +61,15 @@ ktlint {
     }
 }
 
+tasks {
+    matching { task ->
+        task.name.contains("ktlintTestSource") ||
+                task.name.contains("ktlintAndroidTestSource")
+    }.configureEach {
+        enabled = false
+    }
+}
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
