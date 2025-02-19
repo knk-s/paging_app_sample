@@ -3,7 +3,10 @@ package com.example.paging_app_sample.data
 /*
   楽天レシピの大カテゴリ。今のところRICE_DISHES（ご飯もの）以外未使用。
 */
-enum class LargeCategory(val id: String, val displayName: String) {
+enum class LargeCategory(
+    val id: String,
+    val displayName: String,
+) {
     MEAT("10", "肉"),
     FISH("11", "魚"),
     VEGETABLES("12", "野菜"),
