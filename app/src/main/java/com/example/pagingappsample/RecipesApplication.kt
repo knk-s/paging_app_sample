@@ -1,8 +1,8 @@
-package com.example.paging_app_sample
+package com.example.pagingappsample
 
 import android.app.Application
-import com.example.paging_app_sample.data.AppContainer
-import com.example.paging_app_sample.data.DefaultAppContainer
+import com.example.pagingappsample.data.AppContainer
+import com.example.pagingappsample.data.DefaultAppContainer
 
 class RecipesApplication : Application() {
     lateinit var container: AppContainer

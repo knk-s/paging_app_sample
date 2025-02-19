@@ -1,4 +1,4 @@
-package com.example.paging_app_sample
+package com.example.pagingappsample
 
 import org.junit.Assert.*
 import org.junit.Test

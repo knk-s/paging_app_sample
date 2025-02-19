@@ -1,4 +1,4 @@
-package com.example.paging_app_sample.ui.theme
+package com.example.pagingappsample.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
