@@ -47,7 +47,6 @@ enum class LargeCategory(val id: String, val displayName: String) {
     SUMMER("53", "夏（6月～8月）"),
     AUTUMN("54", "秋（9月～11月）"),
     WINTER("55", "冬（12月～2月）"),
-    ;
 }
 
 /*
