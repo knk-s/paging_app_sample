@@ -1,17 +1,20 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("org.jetbrains.kotlin.plugin.serialization") version "2.1.0"
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 android {
-    namespace = "com.example.paging_app_sample"
+    namespace = "com.example.pagingappsample"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.paging_app_sample"
+        applicationId = "com.example.pagingappsample"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
@@ -25,7 +28,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -39,6 +42,31 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+    }
+    lint {
+        htmlReport = true
+        xmlReport = true
+        checkDependencies = true
+    }
+}
+
+ktlint {
+    android = true
+    reporters {
+        reporter(ReporterType.CHECKSTYLE)
+    }
+    filter {
+        exclude("**/androidTest/**")
+        exclude("**/test/**")
+    }
+}
+
+tasks {
+    matching { task ->
+        task.name.contains("ktlintTestSource") ||
+            task.name.contains("ktlintAndroidTestSource")
+    }.configureEach {
+        enabled = false
     }
 }
 

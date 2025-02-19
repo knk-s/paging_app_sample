@@ -19,6 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "paging_app_sample"
+rootProject.name = "pagingappsample"
 include(":app")
- 
